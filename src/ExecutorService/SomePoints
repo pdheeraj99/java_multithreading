@@ -1,0 +1,7 @@
+1. Internally ExecutorService is using LinkedBlockingQueue
+
+2. For executorService.shutdown()
+By manually doing shutdown it will terminate all the threads in the threadPool. otherwise the threads keep on running.
+If you didnt keep below line the threads keep on running
+
+3.
