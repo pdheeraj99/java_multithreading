@@ -4,4 +4,31 @@
 By manually doing shutdown it will terminate all the threads in the threadPool. otherwise the threads keep on running.
 If you didnt keep below line the threads keep on running
 
-3.
+3. Difference between Fixed Thread Pool and Cached Thread Pool ?
+FixedThreadPool vs CachedThreadPool
+
+FixedThreadPool 🔒
+
+Threads: Fixed number (set by you).
+
+Use case: Steady workload (e.g., processing consistent tasks).
+
+Creates the fixed number of threads and use those fixed threads  even though heavy or low
+workload
+
+Behavior: Queues tasks if busy.
+
+CachedThreadPool 🚀
+
+Threads: Grows/shrinks automatically.
+
+Use case: Many short tasks (e.g., handling spikes in requests).
+
+Behavior: Creates new threads if busy, kills idle ones after 60s.
+
+Creates the threads based on demand but if existing threads are free it will reuse the same
+thread again and shrinks and if demand increases again creates threads and use those
+
+TL;DR: Use Fixed for stability, Cached for flexibility
+
+4.
