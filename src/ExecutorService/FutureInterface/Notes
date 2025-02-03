@@ -1,0 +1,41 @@
+The Future interface in Java is part of the java.util.concurrent package and represents the result of an asynchronous computation. It provides methods to check if the computation is complete, to wait for its completion, and to retrieve the result of the computation. The Future interface is typically used with ExecutorService to manage and retrieve the results of asynchronous tasks.
+
+Key Methods of the Future Interface
+boolean cancel(boolean mayInterruptIfRunning):
+
+Attempts to cancel the execution of the task.
+If the task has already completed or been canceled, it returns false.
+If the task is still running, it attempts to stop it and returns true.
+boolean isCancelled():
+
+Returns true if the task was canceled before it completed normally.
+boolean isDone():
+
+Returns true if the task has completed, whether it was canceled, completed normally, or encountered an exception.
+V get():
+
+Waits if necessary for the task to complete and then retrieves its result.
+Throws InterruptedException if the current thread was interrupted while waiting.
+Throws ExecutionException if the computation threw an exception.
+Throws CancellationException if the task was canceled.
+V get(long timeout, TimeUnit unit):
+
+Waits if necessary for at most the given time for the task to complete and then retrieves its result.
+Throws TimeoutException if the wait timed out.
+Throws InterruptedException, ExecutionException, and CancellationException as described above.
+
+Explanation
+Callable Task:
+
+A Callable task is created that simulates some work by sleeping for 2 seconds and then returns a result.
+Submitting the Task:
+
+The task is submitted to an ExecutorService, which returns a Future object representing the pending result of the task.
+Retrieving the Result:
+
+The get() method of the Future object is called to retrieve the result of the task. This method blocks until the task is complete.
+Handling Exceptions:
+
+The get() method can throw InterruptedException if the current thread is interrupted while waiting, and ExecutionException if the computation threw an exception.
+Summary
+The Future interface is a powerful tool for managing asynchronous computations in Java. It allows you to submit tasks for execution, check their status, cancel them if necessary, and retrieve their results once they are complete.
