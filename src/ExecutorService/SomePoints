@@ -33,3 +33,26 @@ TL;DR: Use Fixed for stability, Cached for flexibility
 
 
 4.
+
+FixedThreadPool: Use when you need a stable number of threads and want to limit resource usage.
+CachedThreadPool: Use when you have a large number of short-lived tasks and need a flexible number of threads.
+
+5. Difference between Submit and Execute
+Execute method will take only Runnable interface
+while Submit method will take both Runnable and Callable Interface
+
+  // Works almost like Fixed Thread Pool but with some diff
+    ExecutorService executorService = Executors.newScheduledThreadPool(3);
+    PolicyReminderTask class may be implementing Runnable or Callable Interface
+    for (Customer customer : customers) {
+        PolicyReminderTask task = new PolicyReminderTask(customer);
+        executorService.submit(task);
+    }
+
+    PolicyReminderTask class must implement only Runnable Interface
+   for (Customer customer : customers) {
+        PolicyReminderTask task = new PolicyReminderTask(customer);
+        executorService.execute(task);
+   }
+
+6.
