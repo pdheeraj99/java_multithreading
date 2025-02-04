@@ -1,18 +1,20 @@
 package ExecutorService.ScheduledThreadPool;
 
-public class PolicyReminderTask implements Runnable {
+import java.util.concurrent.Callable;
+
+public class PolicyReminderCallableTask implements Callable<String> {
     private Customer customer;
 
-    public PolicyReminderTask(Customer customer) {
+    public PolicyReminderCallableTask(Customer customer) {
         this.customer = customer;
     }
 
     @Override
-    public void run() {
-        sendReminder(customer);
+    public String call() {
+        return sendReminder(customer);
     }
 
-    private void sendReminder(Customer customer) {
+    private String sendReminder(Customer customer) {
         System.out.println("Sending policy reminder to " + customer.getName() + " at " + customer.getEmail());
         // Simulate sending email
         try {
@@ -20,6 +22,6 @@ public class PolicyReminderTask implements Runnable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("Reminder sent to " + customer.getName());
+        return "Reminder sent to " + customer.getName();
     }
 }
