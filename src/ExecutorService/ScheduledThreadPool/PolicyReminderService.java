@@ -30,16 +30,23 @@ public class PolicyReminderService {
             futures.add(future);
         }
 
+//        scheduleAtFixedRate: Executes every 10 seconds, regardless of how long the task takes to complete.
+//        scheduleWithFixedDelay: Executes 15 seconds after the previous execution finishes.
+
         // Schedule Runnable tasks at a fixed rate
+        // scheduleAtFixedRate: Schedules a task to run at a fixed rate. The task is executed at regular intervals, starting after the initial delay. The interval is measured from the start of one execution to the start of the next.
         for (Customer customer : customers) {
             PolicyReminderRunnableTask runnableTask = new PolicyReminderRunnableTask(customer);
+            // Task runs every 10 seconds, starting immediately
             scheduledExecutorService.scheduleAtFixedRate(runnableTask, 0, 10, TimeUnit.SECONDS);
         }
 
+        // scheduleWithFixedDelay: Schedules a task to run with a fixed delay between the end of one execution and the start of the next. The task is executed after the initial delay, and subsequent executions are delayed by the specified period after the previous execution completes.
         // Schedule a periodic Runnable task with a fixed delay
         scheduledExecutorService.scheduleWithFixedDelay(() -> {
             System.out.println("Running periodic task with fixed delay");
         }, 0, 15, TimeUnit.SECONDS);
+// Task runs 15 seconds after the previous execution completes, starting immediately
 
         // Check results of Callable tasks
         for (Future<String> future : futures) {
