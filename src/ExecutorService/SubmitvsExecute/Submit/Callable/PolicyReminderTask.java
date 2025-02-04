@@ -9,6 +9,9 @@ public class PolicyReminderTask implements Callable<String> {
         this.customer = customer;
     }
 
+    // Difference is this
+    // We can return from call method in Callable Interface ( PolicyReminderTask )
+    // Not possible from Runnable Interface
     @Override
     public String call() {
         return sendReminder(customer);

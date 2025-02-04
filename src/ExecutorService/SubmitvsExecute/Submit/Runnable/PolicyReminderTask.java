@@ -7,6 +7,9 @@ public class PolicyReminderTask implements Runnable {
         this.customer = customer;
     }
 
+    // Difference is this
+    // We cant return anything from here only execution
+    // Possible from Callable Interface
     @Override
     public void run() {
         sendReminder(customer);
