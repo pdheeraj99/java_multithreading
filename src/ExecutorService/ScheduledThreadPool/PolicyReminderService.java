@@ -48,14 +48,29 @@ public class PolicyReminderService {
         }, 0, 15, TimeUnit.SECONDS);
 // Task runs 15 seconds after the previous execution completes, starting immediately
 
+//        ---------------------------------------------------------------------------------------------------------
+
         // Check results of Callable tasks
+
         for (Future<String> future : futures) {
             try {
-                System.out.println(future.get());
+            // get() => Waits if necessary for the computation to complete, and then retrieves its result.
+                System.out.println(future.get()); // // *** This will block until the task is done
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+
+        for (Future<String> future : futures) {
+            // Check if the task is done
+            if (future.isDone()) { // No Blockage
+                System.out.println("Task is already done");
+            } else {
+                System.out.println("Task is not done yet");
+            }
+        }
+
+//        --------------------------------------------------------------------------------------------------------
 
         // Shutdown the executor service after some time to allow tasks to complete
         scheduledExecutorService.schedule(() -> {
