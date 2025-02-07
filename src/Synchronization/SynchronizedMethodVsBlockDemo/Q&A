@@ -1,0 +1,233 @@
+1. Threads will work for only Runnables only or Callables also ??
+
+Threads in Java can work with both Runnable and Callable interfaces. However, there are some differences in how they are used:
+
+-> Runnable
+The Runnable interface has a single method run() that does not return a result and cannot throw a checked exception.
+It is used with Thread objects directly.
+
+Example:
+Runnable runnableTask = () -> {
+    System.out.println("Runnable task is running");
+};
+
+Thread thread = new Thread(runnableTask);
+thread.start();
+
+-> Callable
+The Callable interface has a single method call() that returns a result and can throw a checked exception.
+It is used with ExecutorService to submit tasks and get results.
+
+Example:
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+
+Callable<String> callableTask = () -> {
+    return "Callable task result";
+};
+
+ExecutorService executorService = Executors.newSingleThreadExecutor();
+Future<String> future = executorService.submit(callableTask);
+
+try {
+    String result = future.get(); // This will block until the result is available
+    System.out.println(result);
+} catch (Exception e) {
+    e.printStackTrace();
+}
+
+executorService.shutdown();
+
+In summary,
+    * Runnable is used with Thread objects,
+    * Callable is used with ExecutorService to handle tasks that return results or throw exceptions.
+
+2. Callables are only used in ExecutorService ?
+
+No, Callable can be used in other contexts as well, but it is most commonly used with ExecutorService because it provides a way to submit tasks that return a result or throw an exception. Here are some other contexts where Callable can be used:
+FutureTask:
+FutureTask is a concrete implementation of RunnableFuture, which implements both Runnable and Future. It can be used to wrap a Callable and run it in a thread
+
+import java.util.concurrent.Callable;
+import java.util.concurrent.FutureTask;
+
+Callable<String> callableTask = () -> {
+    return "Callable task result";
+};
+
+FutureTask<String> futureTask = new FutureTask<>(callableTask);
+Thread thread = new Thread(futureTask);
+thread.start();
+
+try {
+    String result = futureTask.get(); // This will block until the result is available
+    System.out.println(result);
+} catch (Exception e) {
+    e.printStackTrace();
+}
+
+=> Custom Thread Pool Implementations:
+You can create custom thread pool implementations that use Callable for tasks.
+=> ScheduledExecutorService:
+ScheduledExecutorService can schedule Callable tasks to run after a delay or periodically.
+
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.ScheduledFuture;
+
+ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
+
+Callable<String> callableTask = () -> {
+    return "Callable task result";
+};
+
+ScheduledFuture<String> future = scheduledExecutorService.schedule(callableTask, 5, TimeUnit.SECONDS);
+
+try {
+    String result = future.get(); // This will block until the result is available
+    System.out.println(result);
+} catch (Exception e) {
+    e.printStackTrace();
+}
+
+scheduledExecutorService.shutdown();
+
+In summary, while Callable is most commonly used with ExecutorService, it can also be used in other contexts such as FutureTask and custom thread pool implementations.
+
+3. Callables cannot be passed to threads like Runnables ???
+
+Correct, Callable cannot be directly passed to a Thread like Runnable. Instead, Callable is typically used with ExecutorService to submit tasks that return a result or throw an exception. However, you can wrap a Callable in a FutureTask and then pass the FutureTask to a Thread.
+
+Example
+Here is an example of how to use Callable with FutureTask and Thread:
+
+import java.util.concurrent.Callable;
+import java.util.concurrent.FutureTask;
+
+public class CallableWithThreadExample {
+    public static void main(String[] args) {
+        Callable<String> callableTask = () -> {
+            // Simulate some computation
+            Thread.sleep(1000);
+            return "Callable task result";
+        };
+
+        // Wrap the Callable in a FutureTask
+        FutureTask<String> futureTask = new FutureTask<>(callableTask);
+
+        // Pass the FutureTask to a Thread
+        Thread thread = new Thread(futureTask);
+        thread.start();
+
+        try {
+            // Get the result of the Callable task
+            String result = futureTask.get(); // This will block until the result is available
+            System.out.println(result);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+In this example:
+A Callable task is created.
+The Callable is wrapped in a FutureTask.
+The FutureTask is passed to a Thread.
+The result of the Callable task is retrieved using the get method of FutureTask.
+
+5. **Difference Between `Runnable` and `Callable`**:
+   - **Runnable**:
+     - Does not return a result.
+     - Cannot throw checked exceptions.
+   - **Callable**:
+     - Returns a result.
+     - Can throw checked exceptions.
+
+   ```java
+   // Runnable example
+   Runnable runnableTask = () -> System.out.println("Runnable task is running");
+   Thread thread = new Thread(runnableTask);
+   thread.start();
+
+   // Callable example
+   import java.util.concurrent.Callable;
+   Callable<String> callableTask = () -> "Callable task result";
+   ```
+
+6. **Using `FutureTask` with `Callable`**:
+   - `FutureTask` can be used to wrap a `Callable` and run it in a `Thread`.
+
+   ```java
+   import java.util.concurrent.Callable;
+   import java.util.concurrent.FutureTask;
+
+   Callable<String> callableTask = () -> "Callable task result";
+   FutureTask<String> futureTask = new FutureTask<>(callableTask);
+   Thread thread = new Thread(futureTask);
+   thread.start();
+
+   try {
+       String result = futureTask.get(); // Blocks until the result is available
+       System.out.println(result);
+   } catch (Exception e) {
+       e.printStackTrace();
+   }
+   ```
+
+7. **Using `ScheduledExecutorService` with `Callable`**:
+   - `ScheduledExecutorService` can schedule `Callable` tasks to run after a delay or periodically.
+
+   ```java
+   import java.util.concurrent.Callable;
+   import java.util.concurrent.Executors;
+   import java.util.concurrent.ScheduledExecutorService;
+   import java.util.concurrent.TimeUnit;
+   import java.util.concurrent.ScheduledFuture;
+
+   ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
+   Callable<String> callableTask = () -> "Callable task result";
+   ScheduledFuture<String> future = scheduledExecutorService.schedule(callableTask, 5, TimeUnit.SECONDS);
+
+   try {
+       String result = future.get(); // Blocks until the result is available
+       System.out.println(result);
+   } catch (Exception e) {
+       e.printStackTrace();
+   }
+
+   scheduledExecutorService.shutdown();
+   ```
+
+8. **Custom Thread Pool Implementations**:
+   - You can create custom thread pool implementations that use `Callable` for tasks.
+
+   ```java
+   import java.util.concurrent.Callable;
+   import java.util.concurrent.ExecutorService;
+   import java.util.concurrent.Executors;
+   import java.util.concurrent.Future;
+
+   ExecutorService customThreadPool = Executors.newFixedThreadPool(2);
+   Callable<String> callableTask = () -> "Callable task result";
+   Future<String> future = customThreadPool.submit(callableTask);
+
+   try {
+       String result = future.get(); // Blocks until the result is available
+       System.out.println(result);
+   } catch (Exception e) {
+       e.printStackTrace();
+   }
+
+   customThreadPool.shutdown();
+   ```
+
+9. So in executor service we can passed runnables and callables there is no restriction ??
+
+Yes thats correct. In ExecutorService, you can pass both Runnable and Callable tasks without any restrictions.
+
+10.  if used directly in Thread then only runnables will be passed and callables need to wrap in future object and then passed ??
+
+When using Thread directly, you can only pass Runnable tasks. If you want to use Callable with Thread, you need to wrap the Callable in a FutureTask and then pass the FutureTask to the Thread.

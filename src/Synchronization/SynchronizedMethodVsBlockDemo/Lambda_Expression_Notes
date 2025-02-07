@@ -1,0 +1,57 @@
+The JVM understands that a lambda expression is being passed because lambda expressions in Java are a feature introduced in Java 8 that allows for a clear and concise way to represent instances of functional interfaces (interfaces with a single abstract method).
+
+### How the JVM Understands Lambda Expressions
+
+1. **Functional Interface**:
+   - A lambda expression can only be used where a functional interface is expected. A functional interface is an interface with a single abstract method (SAM).
+                                   - Example: `Runnable` is a functional interface with a single abstract method `run()`.
+
+2. **Syntax**:
+   - The syntax of a lambda expression is distinct and concise. It consists of parameters, an arrow (`->`), and a body.
+   - Example: `() -> { ... }` is the syntax for a lambda expression.
+
+3. **Type Inference**:
+   - The JVM uses type inference to determine the type of the lambda expression based on the context in which it is used.
+   - Example: When a lambda expression is passed to a `Thread` constructor that expects a `Runnable`, the JVM infers that the lambda expression is an implementation of the `Runnable` interface.
+
+### Example
+
+In the following code, the lambda expression `() -> { ... }` is passed to the `Thread` constructor, which expects a `Runnable`:
+
+```java
+Thread thread2 = new Thread(() -> {
+    for (int i = 0; i < 5; i++) {
+        example.incrementCounterWithBlock();
+    }
+});
+```
+
+or
+
+Runnable r = () -> {
+                 for (int i = 0; i < 5; i++) {
+                     example.incrementCounterWithBlock();
+                 }
+             }
+Thread thread2 = new Thread(r)
+
+- The `Thread` constructor expects a `Runnable` object.
+- The lambda expression `() -> { ... }` provides an implementation of the `run` method of the `Runnable` interface.
+- The JVM recognizes the lambda expression as an instance of the `Runnable` interface and executes the `run` method when the thread is started.
+
+
+EXAMPLE--------------------------------------->
+
+@FunctionalInterface
+interface CustomTask {
+    void execute();
+}
+
+CustomTask task = () -> {
+    System.out.println("Executing custom task");
+};
+
+// Using the custom task
+task.execute();
+
+In this example, the lambda expression () -> { System.out.println("Executing custom task"); } is implementing the execute method of the CustomTask interface. The JVM infers this based on the context where the lambda expression is used.

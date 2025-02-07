@@ -1,0 +1,89 @@
+Here are the detailed points to remember about the `SynchronizedMethodVsBlockDemo` class:
+
+1. **Purpose**:
+    - The class demonstrates the difference between using synchronized methods and synchronized blocks in Java for thread synchronization.
+
+2. **Synchronized Method**:
+    - The `incrementCounter` method is synchronized, meaning the entire method is locked, and only one thread can execute it at a time.
+    - This ensures that the counter increment operation is thread-safe.
+
+3. **Synchronized Block**:
+    - The `incrementCounterWithBlock` method uses a synchronized block within the method.
+    - Only the code inside the synchronized block is locked, allowing finer control over synchronization.
+    - This can be more efficient if only a part of the method needs to be synchronized.
+
+4. **Thread Creation**:
+    - Two threads are created to demonstrate the usage of synchronized methods and blocks.
+    - `thread1` uses an anonymous inner class implementing `Runnable` to call the `incrementCounter` method.
+    - `thread2` uses a lambda expression to call the `incrementCounterWithBlock` method.
+
+5. **Why Different Thread Creation Methods**:
+    - **Anonymous Inner Class**:
+        - **Useful for Creating a One-Time Use Class with Specific Behavior**:
+            - An anonymous inner class is a local class without a name that is declared and instantiated all at once.
+            - It is often used when you need to create an instance of a class with slight modifications or when you need to override methods of a class or interface.
+            - Example: `new Runnable() { ... }` is the anonymous inner class implementing the `Runnable` interface.
+        - **Allows Overriding Methods or Providing Additional Functionality**:
+            - Anonymous inner classes can override methods of the superclass or interface they are extending or implementing.
+            - Example: Overriding the `run` method of the `Runnable` interface to provide specific behavior for the thread.
+        - **Compatible with Older Versions of Java (Before Java 8)**:
+            - Anonymous inner classes have been available since Java 1.1, making them compatible with older versions of Java.
+            - Example: Useful in maintaining legacy code or working in environments using older Java versions.
+    - **Lambda Expression**:
+        - **Provides a Concise and Readable Way to Implement a Functional Interface**:
+            - A lambda expression is a concise way to represent an anonymous function that can be passed around as an object.
+            - Introduced in Java 8, lambda expressions provide a clear and concise way to implement functional interfaces.
+            - Example: `() -> { ... }` is the lambda expression implementing the `Runnable` interface.
+        - **Encourages a Functional Programming Style**:
+            - Lambda expressions support a functional programming style, making the code more expressive and easier to understand.
+            - Example: Writing more declarative code that focuses on what needs to be done rather than how it is done.
+        - **Requires Java 8 or Later**:
+            - Lambda expressions are a feature introduced in Java 8, so they require the use of Java 8 or later versions.
+            - Example: Useful in modern Java applications to improve code quality and developer productivity.
+
+6. **Thread Execution**:
+    - Both threads are started, and the `join` method is used to wait for both threads to finish execution.
+    - This ensures that the main thread waits for the completion of both threads before proceeding.
+
+7. **Output**:
+    - The output will show the counter values incremented by both methods, demonstrating the synchronization in action.
+
+8. Key Differences
+Anonymous Inner Class:
+An anonymous inner class is a class that is defined and instantiated in a single expression. It doesn't have a name and is used to override methods or provide specific implementations for interfaces or abstract classes.
+    No name.
+    Defined and instantiated in a single expression.
+    Typically used for one-time use.
+    More concise but less reusable.
+
+Thread thread1 = new Thread(new Runnable() {
+    @Override
+    public void run() {
+        for (int i = 0; i < 5; i++) {
+            example.incrementCounter();
+        }
+    }
+});
+Here, new Runnable() { ... } is the anonymous inner class. It implements the Runnable interface and provides an implementation for the run method. This class is used only once, and we don't need to give it a name.
+
+
+Named Inner Class:
+A named inner class is a regular inner class with a name. It can be reused and instantiated multiple times.
+    Has a name.
+    Defined separately and instantiated as needed.
+    Can be reused multiple times.
+    More verbose but more reusable.
+
+public class MyRunnable implements Runnable {
+    @Override
+    public void run() {
+        for (int i = 0; i < 5; i++) {
+            example.incrementCounter();
+        }
+    }
+}
+
+// Creating a thread using the named inner class
+Thread thread1 = new Thread(new MyRunnable());
+
+Here, MyRunnable is a named inner class. It implements the Runnable interface and provides an implementation for the run method. This class can be instantiated and used multiple times.
