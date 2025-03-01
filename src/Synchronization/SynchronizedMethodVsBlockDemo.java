@@ -1,4 +1,4 @@
-package Synchronization.SynchronizedMethodVsBlockDemo;
+package Synchronization;
 
 public class SynchronizedMethodVsBlockDemo {
         private int counter = 0;

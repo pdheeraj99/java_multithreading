@@ -1,9 +1,9 @@
-package LockingAndUnlocking;
+package Lock;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class LockExample {
+public class LockExampleWithReentrantLock {
     // Shared resource
     private int counter = 0;
 
@@ -25,7 +25,7 @@ public class LockExample {
     }
 
     public static void main(String[] args) {
-        LockExample example = new LockExample();
+        LockExampleWithReentrantLock example = new LockExampleWithReentrantLock();
 
         // Create multiple threads that will increment the counter
         Thread t1 = new Thread(example::increment, "Thread-1");
@@ -36,6 +36,5 @@ public class LockExample {
         t1.start();
         t2.start();
         t3.start();
-
     }
 }
