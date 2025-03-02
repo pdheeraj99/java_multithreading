@@ -326,3 +326,32 @@ public class WorkerThread extends Thread {
 
 ----------------------------------------------------------
 
+GitHub Copilot
+Great! I'm glad that clarified the thread interaction.
+
+Summary: Key Points About Volatile
+To wrap up our discussion about volatile in Java:
+
+Purpose:
+
+Ensures visibility of changes across threads
+Creates a happens-before relationship between write and subsequent reads
+Best Uses:
+
+Status flags (like the termination flag example)
+Simple state indicators read by multiple threads
+Double-checked locking pattern
+Limitations:
+
+Doesn't make compound operations atomic
+Doesn't provide mutual exclusion
+Can't coordinate updates to multiple related variables
+Alternatives:
+
+For atomic operations: AtomicInteger, AtomicBoolean, etc.
+For mutual exclusion: synchronized blocks/methods
+For complex coordination: Locks from java.util.concurrent.locks
+Remember:
+
+Visibility ≠ Atomicity
+volatile is one of the simplest concurrency tools but has specific uses

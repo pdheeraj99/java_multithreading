@@ -5,16 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="90ada191-b99e-422f-bd46-6a50dda2a000" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LockingAndUnlocking/LockExample.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Synchronization/SynchronizedMethodVsBlockDemo/IMP_points" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Synchronization/SynchronizedMethodVsBlockDemo/Lambda_Expression_Notes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Synchronization/SynchronizedMethodVsBlockDemo/Q&amp;A" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Synchronization/SynchronizedMethodVsBlockDemo/Q&amp;A.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Synchronization/SynchronizedMethodVsBlockDemo/SynchronizedMethodVsBlockDemo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Volatility/Notes" beforeDir="false" afterPath="$PROJECT_DIR$/src/Volatility/Notes" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +78,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1740811681819</updated>
-      <workItem from="1740811683656" duration="3061000" />
+      <workItem from="1740811683656" duration="5527000" />
     </task>
     <servers />
   </component>
