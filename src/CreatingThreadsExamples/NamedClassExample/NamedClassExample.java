@@ -1,4 +1,4 @@
-package CreatingThreadsWithRunnableExamples.NamedClassExample;
+package CreatingThreadsExamples.NamedClassExample;
 
 // Explanation:
 // Defines a separate named class NamedRunnable that implements Runnable.

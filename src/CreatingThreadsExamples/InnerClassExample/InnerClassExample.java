@@ -1,4 +1,4 @@
-package CreatingThreadsWithRunnableExamples.InnerClassExample;
+package CreatingThreadsExamples.InnerClassExample;
 
 // Explanation:
 // Defines an inner class InnerRunnable that implements Runnable.

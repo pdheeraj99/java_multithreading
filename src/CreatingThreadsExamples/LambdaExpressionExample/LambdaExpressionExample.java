@@ -1,4 +1,4 @@
-package CreatingThreadsWithRunnableExamples.LambdaExpressionExample;
+package CreatingThreadsExamples.LambdaExpressionExample;
 
 // Explanation:
 // Uses a lambda expression to create an instance of Runnable.

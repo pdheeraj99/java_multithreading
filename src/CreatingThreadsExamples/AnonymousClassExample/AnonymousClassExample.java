@@ -1,4 +1,4 @@
-package CreatingThreadsWithRunnableExamples.AnonymousClassExample;
+package CreatingThreadsExamples.AnonymousClassExample;
 
 // Explanation:
 // Creates an instance of Runnable using an anonymous class.

@@ -1,4 +1,4 @@
-package CreatingThreadsWithRunnableExamples.MethodReferenceExample;
+package CreatingThreadsExamples.MethodReferenceExample;
 
 // Explanation:
 // Uses a method reference example::runMethod to refer to the runMethod of the example object.
