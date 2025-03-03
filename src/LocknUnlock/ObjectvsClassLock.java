@@ -1,4 +1,4 @@
-package Lock;
+package LocknUnlock;
 
 public class ObjectvsClassLock {
 
