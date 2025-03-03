@@ -1,4 +1,4 @@
-package CountDownLatch;
+package Join_vs_CountDownLatch;
 
 /**
  * CountDownLatchDemo.java - Understanding CountDownLatch

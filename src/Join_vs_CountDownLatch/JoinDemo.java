@@ -1,4 +1,4 @@
-package Join;
+package Join_vs_CountDownLatch;
 
 /**
  * JoinDemo.java - Understanding Thread.join()
